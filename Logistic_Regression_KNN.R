@@ -8,7 +8,7 @@ library(forecast)
 library(ggplot2)
 
 #----- 2. set working dictonary ----
-setwd("/Users/Lily/Library/Mobile Documents/com~apple~CloudDocs/Trinity College Dublin/BU7143_BU7144 Business Data Mining and Forecasting/Group Assignment BADM/Movies_db")
+setwd("/Users/Lily/Library/Mobile Documents/com~apple~CloudDocs/Trinity College Dublin/BU7143_BU7144 Business Data Mining and Forecasting/Group Assignment BADM/Movies_db/Movies Data Mining/Data-Mining-Project-Movies")
 
 #---- 3. open files & data cleaning ----
 movies_raw <- read.csv("tmdb_5000_movies.csv")
@@ -44,6 +44,7 @@ valid.df <- movies_norm[valid.index, ]
 
 #---- 7.1. logistic regression model with all variables ----
 #model including all variables
+?glm
 logit.reg2 <- glm(Profitable ~ ., data = train.df, family = "binomial") 
 summary(logit.reg2)
 
@@ -128,6 +129,7 @@ training_results2 <- confusionMatrix(table(logit.reg.train2 >= 0.610,
                                              train.df$Profitable == 1))
 validation_results2 <- confusionMatrix(table(logit.reg.pred2 >= 0.610,
                                              valid.df$Profitable == 1))
+validation_results2
 accuracy(logit.reg.train2, logit.reg.pred2)
 #shows us the error metrics:
 #ME: 0.0005871876
